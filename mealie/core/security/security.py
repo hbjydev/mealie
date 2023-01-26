@@ -83,7 +83,7 @@ def user_from_ldap(db: AllRepositories, username: str, password: str) -> Private
     user_entry = conn.search_s(
         settings.LDAP_BASE_DN,
         ldap.SCOPE_SUBTREE,
-        f"(&(objectClass=user)(|(cn={username})(sAMAccountName={username})(mail={username})))",
+        f"(&(objectClass={settings.LDAP_USER_OBJECTCLASS})(|(cn={username})(sAMAccountName={username})(mail={username})))",
         ["name", "mail"],
     )
     if user_entry is not None and len(user_entry[0]) != 0 and user_entry[0][0] is not None:

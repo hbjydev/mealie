@@ -119,6 +119,7 @@ class AppSettings(BaseSettings):
     LDAP_BIND_TEMPLATE: NoneStr = None
     LDAP_BASE_DN: NoneStr = None
     LDAP_ADMIN_FILTER: NoneStr = None
+    LDAP_USER_OBJECTCLASS: str = "user"
 
     @property
     def LDAP_ENABLED(self) -> bool:

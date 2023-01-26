@@ -84,19 +84,22 @@ def user_from_ldap(db: AllRepositories, username: str, password: str) -> Private
         settings.LDAP_BASE_DN,
         ldap.SCOPE_SUBTREE,
         f"(&(objectClass={settings.LDAP_USER_OBJECTCLASS})(|(cn={username})(sAMAccountName={username})(mail={username})))",
-        ["name", "mail"],
+        ["name", "givenName", "mail"],
     )
+
     if user_entry is not None and len(user_entry[0]) != 0 and user_entry[0][0] is not None:
         user_dn, user_attr = user_entry[0]
     else:
         return False
+
+    ldap_name = user_attr["name"][0] if "name" in user_attr else user_attr["givenName"][0]
 
     if user is None:
         user = db.users.create(
             {
                 "username": username,
                 "password": "LDAP",
-                "full_name": user_attr["name"][0],
+                "full_name": str(ldap_name),
                 "email": user_attr["mail"][0],
                 "admin": False,
             },

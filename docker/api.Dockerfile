@@ -72,6 +72,8 @@ RUN apt-get update \
     && apt-get install --no-install-recommends -y \
     gosu \
     tesseract-ocr-all \
+    # LDAP dependencies
+    libsasl2-dev libldap2-dev libssl-dev \
     && apt-get autoremove \
     && rm -rf /var/lib/apt/lists/*
 

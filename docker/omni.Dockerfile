@@ -97,6 +97,8 @@ RUN apt-get update \
     tesseract-ocr-all \
     curl \
     gnupg \
+    # LDAP Dependencies
+    libsasl2-dev libldap2-dev libssl-dev \
     && apt-get autoremove \
     && rm -rf /var/lib/apt/lists/*
 

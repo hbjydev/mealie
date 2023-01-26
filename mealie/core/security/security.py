@@ -92,6 +92,7 @@ def user_from_ldap(db: AllRepositories, username: str, password: str) -> Private
     else:
         return False
 
+    # Get the "name" or "givenName" field depending on the LDAP server type.
     ldap_name = user_attr["name"][0] if "name" in user_attr else user_attr["givenName"][0]
 
     if user is None:
@@ -100,7 +101,7 @@ def user_from_ldap(db: AllRepositories, username: str, password: str) -> Private
                 "username": username,
                 "password": "LDAP",
                 "full_name": str(ldap_name),
-                "email": user_attr["mail"][0],
+                "email": str(user_attr["mail"][0]),
                 "admin": False,
             },
         )

@@ -1,0 +1,43 @@
+dn: ou=users,dc=mealie,dc=io
+changetype: add
+objectClass: top
+objectClass: organizationalUnit
+ou: users
+
+dn: ou=groups,dc=mealie,dc=io
+changetype: add
+objectClass: top
+objectClass: organizationalUnit
+ou: groups
+
+dn: uid=mealie,ou=users,dc=mealie,dc=io
+changetype: add
+objectClass: top
+objectClass: account
+objectClass: posixAccount
+objectClass: shadowAccount
+cn: mealie
+uid: mealie
+uidNumber: 5000
+gidNumber: 100
+homeDirectory: /home/mealie
+loginShell: /bin/bash
+gecos: mealie
+userPassword: {SSHA}D1PPs30VnoaQ4KEKILA/deU2cgNmafKH
+shadowLastChange: 0
+shadowMax: 0
+shadowWarning: 0
+
+dn: cn=mealie-users,ou=groups,dc=mealie,dc=io
+changetype: add
+objectClass: top
+objectClass: groupOfNames
+cn: mealie-users
+member: uid=mealie,ou=users,dc=mealie,dc=io
+
+dn: cn=mealie-admins,ou=groups,dc=mealie,dc=io
+changetype: add
+objectClass: top
+objectClass: groupOfNames
+cn: mealie-admins
+member: uid=mealie,ou=users,dc=mealie,dc=io
